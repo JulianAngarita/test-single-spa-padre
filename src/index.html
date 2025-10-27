@@ -23,25 +23,25 @@
             console.log('singleSpa disponible:', typeof singleSpa !== 'undefined');
             
             if (typeof singleSpa === 'undefined') {
-                console.error('❌ singleSpa no se cargó correctamente');
+                console.error('singleSpa no se cargó correctamente');
                 return;
             }
             
             if (typeof System === 'undefined') {
-                console.error('❌ SystemJS no se cargó correctamente');
+                console.error('SystemJS no se cargó correctamente');
                 return;
             }
             
-            console.log('✅ Todas las dependencias cargadas');
+            console.log('Todas las dependencias cargadas');
             
             // Registrar aplicación
             singleSpa.registerApplication({
                 name: "test-single-spa-hijo",
                 app: () => {
-                    console.log('📦 Cargando microfrontend hijo...');
+                    console.log('Cargando microfrontend hijo...');
                     return System.import("https://test-single-spa-hijo.netlify.app/main.single-spa.js")
                         .catch(err => {
-                            console.error('❌ Error cargando microfrontend:', err);
+                            console.error('Error cargando microfrontend:', err);
                             throw err;
                         });
                 },
@@ -50,7 +50,7 @@
             
             // Iniciar single-spa
             singleSpa.start();
-            console.log('🚀 single-spa iniciado correctamente');
+            console.log('single-spa iniciado correctamente');
             
             // Verificar que la aplicación se registró
             console.log('Aplicaciones registradas:', singleSpa.getAppNames());

@@ -39,7 +39,7 @@
                 name: "test-single-spa-hijo",
                 app: () => {
                     console.log('📦 Cargando microfrontend hijo...');
-                    return System.import("http://localhost:4000/main.single-spa.js")
+                    return System.import("https://test-single-spa-hijo.netlify.app/main.single-spa.js")
                         .catch(err => {
                             console.error('❌ Error cargando microfrontend:', err);
                             throw err;

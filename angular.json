@@ -29,7 +29,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/systemjs-importmap.js",
-              "src/root-config.js"
+              "src/root-config.js",
+              "src/_headers"
             ],
             "styles": [
               "src/styles.scss"
@@ -40,7 +41,7 @@
               "libraryName": "test-single-spa-padre",
               "libraryTarget": "umd"
             },
-            "deployUrl": "http://localhost:4100/"
+            "deployUrl": "./"
           },
           "configurations": {
             "production": {

@@ -2,11 +2,9 @@
   "name": "test-single-spa-padre",
   "version": "0.0.0",
   "scripts": {
-      "clean": "npx rimraf dist",
-      "build:dev": "npm run clean && ng build --configuration development",
-      "postbuild:dev": "copyfiles src/index.html src/root-config.js dist/test-single-spa-padre/",
-      "serve:root": "npx http-server dist/test-single-spa-padre -p 4100 --cors",
-      "start": "npm run build:dev && npm run postbuild:dev && npm run serve:root"
+    "clean": "npx rimraf dist",
+    "build": "ng build --configuration production",
+    "serve": "npm run build && npx http-server dist/test-single-spa-padre -p 4100 --cors"
   },
   "private": true,
   "dependencies": {

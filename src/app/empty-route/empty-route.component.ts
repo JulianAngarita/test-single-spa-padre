@@ -4,4 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-empty-route',
   template: '',
 })
-export class EmptyRouteComponent {}
+export class EmptyRouteComponent {
+
+}

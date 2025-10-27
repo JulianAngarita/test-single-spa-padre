@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "test-single-spa-hijo": "http://localhost:4000/main.js"
+  }
+}

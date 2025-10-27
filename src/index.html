@@ -1,13 +1,60 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>TestSingleSpaPadre</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Single-spa Padre</title>
+    <base href="/">
+    <!-- Preload de SystemJS -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/systemjs@6.10.0/dist/system.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/umd/single-spa.min.js" as="script">
 </head>
 <body>
-  <app-root></app-root>
+    <div id="root"></div>
+    <script src="https://cdn.jsdelivr.net/npm/zone.js@0.14.5/bundles/zone.umd.min.js"></script>
+    <!-- Cargar SystemJS primero -->
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.10.0/dist/system.min.js"></script>
+    <!-- Luego single-spa UMD -->
+    <script src="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/umd/single-spa.min.js"></script>
+    
+    <script>
+        // Esperar a que todo esté cargado
+        window.addEventListener('load', function() {
+            console.log('=== VERIFICACIÓN INICIAL ===');
+            console.log('System disponible:', typeof System !== 'undefined');
+            console.log('singleSpa disponible:', typeof singleSpa !== 'undefined');
+            
+            if (typeof singleSpa === 'undefined') {
+                console.error('❌ singleSpa no se cargó correctamente');
+                return;
+            }
+            
+            if (typeof System === 'undefined') {
+                console.error('❌ SystemJS no se cargó correctamente');
+                return;
+            }
+            
+            console.log('✅ Todas las dependencias cargadas');
+            
+            // Registrar aplicación
+            singleSpa.registerApplication({
+                name: "test-single-spa-hijo",
+                app: () => {
+                    console.log('📦 Cargando microfrontend hijo...');
+                    return System.import("http://localhost:4000/main.single-spa.js")
+                        .catch(err => {
+                            console.error('❌ Error cargando microfrontend:', err);
+                            throw err;
+                        });
+                },
+                activeWhen: ["/"]
+            });
+            
+            // Iniciar single-spa
+            singleSpa.start();
+            console.log('🚀 single-spa iniciado correctamente');
+            
+            // Verificar que la aplicación se registró
+            console.log('Aplicaciones registradas:', singleSpa.getAppNames());
+        });
+    </script>
 </body>
 </html>
